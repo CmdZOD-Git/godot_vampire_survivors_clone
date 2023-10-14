@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=6 format=3 uid="uid://dkwr2sd06if63"]
+
+[ext_resource type="Script" path="res://Player/upgrade_effect.gd" id="1_3ffga"]
+[ext_resource type="Texture2D" uid="uid://bldhq1fcl8ab1" path="res://Textures/Items/icon-set.png" id="2_wqncq"]
+[ext_resource type="Script" path="res://Player/upgrade_item.gd" id="3_i3k21"]
+
+[sub_resource type="Resource" id="Resource_brihs"]
+script = ExtResource("1_3ffga")
+upgrade_effect = 2
+effect_value = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgp0g"]
+atlas = ExtResource("2_wqncq")
+region = Rect2(3, 19, 10, 10)
+
+[resource]
+script = ExtResource("3_i3k21")
+name = "AttackUp2"
+level = 2
+icon = SubResource("AtlasTexture_xgp0g")
+prerequisite = Array[String](["AttackUp1"])
+effect_call = Array[ExtResource("1_3ffga")]([SubResource("Resource_brihs")])
+description_name = "Attack"
+description = "Description:"
+display_in_tray = true

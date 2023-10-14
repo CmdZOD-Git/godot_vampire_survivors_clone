@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=6 format=3 uid="uid://c6cjwdfpcg012"]
+
+[ext_resource type="Script" path="res://Player/upgrade_effect.gd" id="1_8ty8y"]
+[ext_resource type="Script" path="res://Player/upgrade_item.gd" id="1_ti3pl"]
+[ext_resource type="Texture2D" uid="uid://bldhq1fcl8ab1" path="res://Textures/Items/icon-set.png" id="2_calng"]
+
+[sub_resource type="Resource" id="Resource_ei8hf"]
+script = ExtResource("1_8ty8y")
+upgrade_effect = 8
+effect_value = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7ihu"]
+atlas = ExtResource("2_calng")
+region = Rect2(35, 19, 10, 10)
+
+[resource]
+script = ExtResource("1_ti3pl")
+name = "Plasma1"
+level = 1
+icon = SubResource("AtlasTexture_p7ihu")
+prerequisite = Array[String]([])
+effect_call = Array[ExtResource("1_8ty8y")]([SubResource("Resource_ei8hf")])
+description_name = "Plasma"
+description = "Description:"
+display_in_tray = true

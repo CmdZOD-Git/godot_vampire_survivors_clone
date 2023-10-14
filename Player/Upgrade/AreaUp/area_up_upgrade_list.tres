@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="UpgradeList" load_steps=5 format=3 uid="uid://6ulc8ctu8gxj"]
+
+[ext_resource type="Script" path="res://Player/upgrade_list.gd" id="1_t315m"]
+[ext_resource type="Resource" uid="uid://civo767mq0ltw" path="res://Player/Upgrade/AreaUp/area_up_1.tres" id="2_xkncc"]
+[ext_resource type="Resource" uid="uid://6ltdcfucfr3s" path="res://Player/Upgrade/AreaUp/area_up_2.tres" id="3_fplub"]
+[ext_resource type="Resource" uid="uid://bhq831f7wvux4" path="res://Player/Upgrade/AreaUp/area_up_3.tres" id="4_npinf"]
+
+[resource]
+script = ExtResource("1_t315m")
+upgrade_list = Array[Resource("res://Player/upgrade_item.gd")]([ExtResource("2_xkncc"), ExtResource("3_fplub"), ExtResource("4_npinf")])

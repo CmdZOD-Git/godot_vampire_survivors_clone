@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0eto22e1c2kw"]
+
+[ext_resource type="Script" path="res://Player/upgrade_list.gd" id="1_2qwuo"]
+[ext_resource type="Script" path="res://Player/upgrade_item.gd" id="2_138uh"]
+
+[sub_resource type="Resource" id="Resource_gliol"]
+script = ExtResource("2_138uh")
+name = "DefenceUp1"
+level = 1
+prerequisite = Array[String]([])
+effect_call = Array[Resource("res://Player/upgrade_effect.gd")]([])
+description_name = "Name"
+description = "Description:"
+
+[node name="UpgradeList" type="Node"]
+script = ExtResource("1_2qwuo")
+upgrade_list = Array[ExtResource("2_138uh")]([SubResource("Resource_gliol")])

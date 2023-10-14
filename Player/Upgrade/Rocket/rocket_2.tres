@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=8 format=3 uid="uid://don2y8awoiwcg"]
+
+[ext_resource type="Script" path="res://Player/upgrade_effect.gd" id="1_epjb1"]
+[ext_resource type="Texture2D" uid="uid://bldhq1fcl8ab1" path="res://Textures/Items/icon-set.png" id="2_e4hvd"]
+[ext_resource type="Script" path="res://Player/upgrade_item.gd" id="3_aqqqn"]
+
+[sub_resource type="Resource" id="Resource_ei8hf"]
+script = ExtResource("1_epjb1")
+upgrade_effect = 5
+effect_value = 1
+
+[sub_resource type="Resource" id="Resource_xmi44"]
+script = ExtResource("1_epjb1")
+upgrade_effect = 6
+effect_value = 1
+
+[sub_resource type="Resource" id="Resource_3k7lv"]
+script = ExtResource("1_epjb1")
+upgrade_effect = 7
+effect_value = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7ihu"]
+atlas = ExtResource("2_e4hvd")
+region = Rect2(19, 19, 10, 10)
+
+[resource]
+script = ExtResource("3_aqqqn")
+name = "Rocket2"
+level = 2
+icon = SubResource("AtlasTexture_p7ihu")
+prerequisite = Array[String](["Rocket1"])
+effect_call = Array[ExtResource("1_epjb1")]([SubResource("Resource_ei8hf"), SubResource("Resource_xmi44"), SubResource("Resource_3k7lv")])
+description_name = "Rocket"
+description = "Description:
+Projectile +1
+Damage +1"
+display_in_tray = true

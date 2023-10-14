@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=3 uid="uid://b7biwpsbvducp"]
+
+[ext_resource type="Script" path="res://Enemy/enemy.gd" id="1_5wg10"]
+[ext_resource type="Texture2D" uid="uid://d00jnlf32tnsr" path="res://Textures/Enemy/Centipede.png" id="1_mg6b2"]
+[ext_resource type="PackedScene" uid="uid://bgxu6r4to3mbs" path="res://Utility/hurt_box.tscn" id="3_bx2uv"]
+[ext_resource type="PackedScene" uid="uid://dtnd643y4uel1" path="res://Utility/hit_box.tscn" id="4_6d3w7"]
+[ext_resource type="AudioStream" uid="uid://hpv4ekjt4edg" path="res://Audio/SoundEffect/Hitsound 1.mp3" id="5_yofob"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_epmmu"]
+radius = 4.0
+
+[sub_resource type="Animation" id="Animation_55bax"]
+resource_name = "Idle"
+length = 1.2
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_cfamv"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uqqmb"]
+_data = {
+"Move": SubResource("Animation_55bax"),
+"RESET": SubResource("Animation_cfamv")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0b2m"]
+radius = 7.07107
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q0wte"]
+radius = 6.0
+
+[node name="enemy_centipede" type="CharacterBody2D" groups=["Enemy"]]
+top_level = true
+collision_layer = 5
+motion_mode = 1
+script = ExtResource("1_5wg10")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mg6b2")
+hframes = 8
+vframes = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_epmmu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uqqmb")
+}
+
+[node name="HurtBox" parent="." instance=ExtResource("3_bx2uv")]
+visible = false
+collision_mask = 4
+HurtBoxType = 1
+
+[node name="HurtBoxShape" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape2D_h0b2m")
+
+[node name="HitBox" parent="." instance=ExtResource("4_6d3w7")]
+visible = false
+position = Vector2(1.95896, 0.975805)
+collision_layer = 2
+
+[node name="HitBoxShape" parent="HitBox" index="0"]
+position = Vector2(-1.95896, -0.975805)
+shape = SubResource("CircleShape2D_q0wte")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_yofob")
+volume_db = -30.0
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

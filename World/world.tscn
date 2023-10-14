@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://b7ixcuhceh4do"]
+
+[ext_resource type="Texture2D" uid="uid://bf47grbqd8is7" path="res://Textures/grass_patch.png" id="1_rmchk"]
+[ext_resource type="PackedScene" uid="uid://bod4gfon1ya4x" path="res://Player/player.tscn" id="2_3ba3i"]
+[ext_resource type="PackedScene" uid="uid://d1s4uoowo100k" path="res://Utility/enemy_spawner.tscn" id="3_jda7x"]
+[ext_resource type="PackedScene" uid="uid://byg6gnyvh1ir1" path="res://Loot/experience_gem.tscn" id="4_5twi0"]
+[ext_resource type="Theme" uid="uid://dwy8utx3kg5sq" path="res://Font/main_theme.tres" id="5_13au3"]
+[ext_resource type="Script" path="res://Utility/XPProgressBar.gd" id="6_3liat"]
+[ext_resource type="Script" path="res://Utility/LevelLabel.gd" id="7_nkb1f"]
+[ext_resource type="Script" path="res://World/UpgradePicked.gd" id="8_626so"]
+[ext_resource type="FontFile" uid="uid://bpyhvvxykyl02" path="res://Font/RobotoMono-VariableFont_wght.ttf" id="9_cf04h"]
+[ext_resource type="Script" path="res://World/Timer.gd" id="10_fequm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aq3dl"]
+font = ExtResource("9_cf04h")
+font_size = 10
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.419608, 0.713726, 0.407843, 1)
+texture_repeat = 2
+position = Vector2(498, 498)
+scale = Vector2(0.996, 0.996)
+texture = ExtResource("1_rmchk")
+region_enabled = true
+region_rect = Rect2(-1000, -1000, 2000, 2000)
+
+[node name="LootLayer" type="Node2D" parent="." groups=["Loot"]]
+
+[node name="Player" parent="." instance=ExtResource("2_3ba3i")]
+position = Vector2(88, 80)
+
+[node name="enemySpawner" parent="." instance=ExtResource("3_jda7x")]
+
+[node name="ExperienceGem4" parent="." instance=ExtResource("4_5twi0")]
+position = Vector2(221, 106)
+experience = 300
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." groups=["GUI"]]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="XPProgressBar" type="ProgressBar" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = -3.0
+offset_bottom = 17.0
+grow_horizontal = 2
+theme = ExtResource("5_13au3")
+script = ExtResource("6_3liat")
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/Control/XPProgressBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 3.0
+offset_top = -6.0
+offset_right = 45.0
+offset_bottom = 9.0
+grow_vertical = 2
+theme = ExtResource("5_13au3")
+text = "Level"
+script = ExtResource("7_nkb1f")
+
+[node name="UpgradePicked" type="GridContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 20.0
+offset_right = 110.0
+offset_bottom = 33.0
+columns = 6
+script = ExtResource("8_626so")
+
+[node name="Clock" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 18.0
+offset_right = 168.0
+offset_bottom = 35.0
+text = "00:00"
+label_settings = SubResource("LabelSettings_aq3dl")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_fequm")

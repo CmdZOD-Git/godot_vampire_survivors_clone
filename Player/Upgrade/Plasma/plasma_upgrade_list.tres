@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="UpgradeList" load_steps=4 format=3 uid="uid://dr77kynhov4ym"]
+
+[ext_resource type="Script" path="res://Player/upgrade_list.gd" id="1_07vvm"]
+[ext_resource type="Resource" uid="uid://c6cjwdfpcg012" path="res://Player/Upgrade/Plasma/plasma_1.tres" id="2_osrpm"]
+[ext_resource type="Resource" uid="uid://boayafsbqpdqj" path="res://Player/Upgrade/Plasma/plasma_2.tres" id="3_kb12i"]
+
+[resource]
+script = ExtResource("1_07vvm")
+upgrade_list = Array[Resource("res://Player/upgrade_item.gd")]([ExtResource("2_osrpm"), ExtResource("3_kb12i")])

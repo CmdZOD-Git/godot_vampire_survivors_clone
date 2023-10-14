@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://bb7uvhf51328e"]
+
+[ext_resource type="Theme" uid="uid://dwy8utx3kg5sq" path="res://Font/main_theme.tres" id="1_u0cj6"]
+[ext_resource type="LabelSettings" uid="uid://fubqdn20nu5" path="res://GUI/text_settings_base_text.tres" id="2_8lhdx"]
+[ext_resource type="Script" path="res://GUI/ButtonMenu.gd" id="3_0u22b"]
+
+[sub_resource type="Gradient" id="Gradient_8ak8i"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 0.690196)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kudyh"]
+gradient = SubResource("Gradient_8ak8i")
+
+[sub_resource type="Gradient" id="Gradient_icp6x"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.298039, 0.298039, 0.298039, 0.8)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_b425h"]
+gradient = SubResource("Gradient_icp6x")
+
+[node name="MainPanel" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_u0cj6")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_kudyh")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+offset_left = 3.0
+offset_top = 70.0
+offset_right = 283.0
+offset_bottom = 110.0
+theme = ExtResource("1_u0cj6")
+theme_override_font_sizes/font_size = 16
+text = "Dead !
+"
+label_settings = ExtResource("2_8lhdx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonMenu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 129.0
+offset_right = 196.0
+offset_bottom = 175.0
+script = ExtResource("3_0u22b")
+
+[node name="TextureRect" type="TextureRect" parent="ButtonMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_b425h")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ButtonMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Menu"
+label_settings = ExtResource("2_8lhdx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_up" from="ButtonMenu" to="ButtonMenu" method="_on_button_up"]

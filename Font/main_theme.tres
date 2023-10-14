@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dwy8utx3kg5sq"]
+
+[ext_resource type="FontFile" uid="uid://bpyhvvxykyl02" path="res://Font/RobotoMono-VariableFont_wght.ttf" id="1_g36xd"]
+
+[resource]
+default_base_scale = 1.0
+default_font = ExtResource("1_g36xd")
+default_font_size = 8

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=6 format=3 uid="uid://cbqb25x1i8qbn"]
+
+[ext_resource type="Script" path="res://Player/upgrade_effect.gd" id="1_146rp"]
+[ext_resource type="Texture2D" uid="uid://bldhq1fcl8ab1" path="res://Textures/Items/icon-set.png" id="2_1m7c2"]
+[ext_resource type="Script" path="res://Player/upgrade_item.gd" id="3_1xx3h"]
+
+[sub_resource type="Resource" id="Resource_brihs"]
+script = ExtResource("1_146rp")
+upgrade_effect = 14
+effect_value = 5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgp0g"]
+atlas = ExtResource("2_1m7c2")
+region = Rect2(148, 3, 8, 10)
+
+[resource]
+script = ExtResource("3_1xx3h")
+name = "Food"
+level = 0
+icon = SubResource("AtlasTexture_xgp0g")
+prerequisite = Array[String]([])
+effect_call = Array[ExtResource("1_146rp")]([SubResource("Resource_brihs")])
+description_name = "Food"
+description = "Description:"
+display_in_tray = false

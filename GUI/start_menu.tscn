@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://j4kexoxvcft4"]
+
+[ext_resource type="FontFile" uid="uid://bpyhvvxykyl02" path="res://Font/RobotoMono-VariableFont_wght.ttf" id="1_151lr"]
+[ext_resource type="Script" path="res://GUI/start_menu.gd" id="1_im441"]
+
+[sub_resource type="Gradient" id="Gradient_j6waq"]
+colors = PackedColorArray(1, 0, 0, 1, 0.129412, 0.129412, 0.129412, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_j6wes"]
+gradient = SubResource("Gradient_j6waq")
+
+[sub_resource type="LabelSettings" id="LabelSettings_d3xk1"]
+font = ExtResource("1_151lr")
+font_size = 24
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(1, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ui64r"]
+font = ExtResource("1_151lr")
+font_size = 14
+
+[node name="MainPanel" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_j6wes")
+script = ExtResource("1_im441")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 277.0
+offset_bottom = 88.0
+text = "My first Vampire Surviors Clone"
+label_settings = SubResource("LabelSettings_d3xk1")
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 272.0
+offset_right = 292.0
+offset_bottom = 294.0
+text = "By CmdZOD"
+label_settings = SubResource("LabelSettings_ui64r")
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 96.0
+offset_right = 219.0
+offset_bottom = 138.0
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 152.0
+offset_right = 219.0
+offset_bottom = 194.0
+text = "Quit"
+
+[connection signal="button_up" from="StartButton" to="." method="_on_start_button_button_up"]
+[connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]

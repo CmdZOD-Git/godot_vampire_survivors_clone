@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5odwxamilujj"]
+
+[ext_resource type="Script" path="res://GUI/level_up_option.gd" id="1_481qo"]
+[ext_resource type="Texture2D" uid="uid://cs7tajud30pbf" path="res://GUI/orange_panel.tres" id="1_f4b7n"]
+[ext_resource type="Theme" uid="uid://dwy8utx3kg5sq" path="res://Font/main_theme.tres" id="2_bpds1"]
+[ext_resource type="FontFile" uid="uid://bpyhvvxykyl02" path="res://Font/RobotoMono-VariableFont_wght.ttf" id="4_dpe4y"]
+
+[sub_resource type="Gradient" id="Gradient_l5l0b"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ciwn6"]
+gradient = SubResource("Gradient_l5l0b")
+width = 1
+
+[node name="LevelUpOption" type="Button"]
+process_mode = 2
+custom_minimum_size = Vector2(90, 180)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -210.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_481qo")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_ciwn6")
+expand_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="spacer" type="Control" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemIcon" type="TextureRect" parent="HBoxContainer/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_f4b7n")
+stretch_mode = 5
+
+[node name="LevelMark" type="Label" parent="HBoxContainer/VBoxContainer/CenterContainer/ItemIcon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -26.0
+offset_right = 12.0
+offset_bottom = 10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_bpds1")
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("4_dpe4y")
+theme_override_font_sizes/font_size = 20
+text = "X"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_bpds1")
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 10
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Description" type="Label" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_bpds1")
+text = "Description
+Lorem ipsum"
+autowrap_mode = 1
+text_overrun_behavior = 3
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]

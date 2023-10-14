@@ -1,0 +1,115 @@
+[gd_scene load_steps=16 format=3 uid="uid://cwld0b7yixugc"]
+
+[ext_resource type="Texture2D" uid="uid://c7uw34iix01vq" path="res://Textures/Enemy/Hornet.png" id="1_k2q76"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_errho"]
+atlas = ExtResource("1_k2q76")
+region = Rect2(0, 0, 192, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xboa0"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtyh1"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3bwb"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lufe0"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ln1o"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5oud"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58saf"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qarke"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6efr1"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5naax"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f14um"]
+atlas = SubResource("AtlasTexture_errho")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5rmio"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xboa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtyh1")
+}],
+"loop": true,
+"name": &"blinking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3bwb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lufe0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ln1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5oud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58saf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qarke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6efr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5naax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f14um")
+}],
+"loop": true,
+"name": &"move",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxxwy"]
+radius = 5.0
+
+[node name="Hornet" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5rmio")
+animation = &"move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_rxxwy")

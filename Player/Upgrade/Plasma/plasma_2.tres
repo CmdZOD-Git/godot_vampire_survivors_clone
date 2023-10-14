@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=8 format=3 uid="uid://boayafsbqpdqj"]
+
+[ext_resource type="Script" path="res://Player/upgrade_effect.gd" id="1_eek4w"]
+[ext_resource type="Texture2D" uid="uid://bldhq1fcl8ab1" path="res://Textures/Items/icon-set.png" id="2_3ako5"]
+[ext_resource type="Script" path="res://Player/upgrade_item.gd" id="2_7l777"]
+
+[sub_resource type="Resource" id="Resource_ei8hf"]
+script = ExtResource("1_eek4w")
+upgrade_effect = 8
+effect_value = 1
+
+[sub_resource type="Resource" id="Resource_xmi44"]
+script = ExtResource("1_eek4w")
+upgrade_effect = 10
+effect_value = 1
+
+[sub_resource type="Resource" id="Resource_3k7lv"]
+script = ExtResource("1_eek4w")
+upgrade_effect = 9
+effect_value = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7ihu"]
+atlas = ExtResource("2_3ako5")
+region = Rect2(35, 19, 10, 10)
+
+[resource]
+script = ExtResource("2_7l777")
+name = "Plasma2"
+level = 2
+icon = SubResource("AtlasTexture_p7ihu")
+prerequisite = Array[String](["Plasma1"])
+effect_call = Array[ExtResource("1_eek4w")]([SubResource("Resource_ei8hf"), SubResource("Resource_xmi44"), SubResource("Resource_3k7lv")])
+description_name = "Plasma"
+description = "Description:"
+display_in_tray = true

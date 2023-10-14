@@ -1,0 +1,104 @@
+[gd_scene load_steps=12 format=3 uid="uid://bh7tkj5itly7s"]
+
+[ext_resource type="Script" path="res://Player/Attack/slasher.gd" id="1_k3oe3"]
+[ext_resource type="Texture2D" uid="uid://b5dcy4dth4wri" path="res://Textures/Items/Weapons/Assault-Class.png" id="2_33n6p"]
+[ext_resource type="AudioStream" uid="uid://cj1e51x3gekv1" path="res://Audio/SoundEffect/Swing 1.mp3" id="3_ma22x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qkdo"]
+atlas = ExtResource("2_33n6p")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rk0k"]
+atlas = ExtResource("2_33n6p")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c71hb"]
+atlas = ExtResource("2_33n6p")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh03d"]
+atlas = ExtResource("2_33n6p")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vxp7p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qkdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rk0k")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c71hb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hh03d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lom01"]
+radius = 8.06226
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7h3hb"]
+radius = 74.0608
+
+[sub_resource type="LabelSettings" id="LabelSettings_vihxg"]
+font_size = 8
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[node name="Slasher" type="Area2D" groups=["Attack"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_k3oe3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vxp7p")
+animation = &"idle"
+frame_progress = 0.610435
+
+[node name="HitBox" type="CollisionShape2D" parent="." groups=["Attack"]]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_lom01")
+
+[node name="SeekArea" type="Area2D" parent="." groups=["Seek"]]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeekArea"]
+shape = SubResource("CircleShape2D_7h3hb")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ma22x")
+volume_db = -30.0
+pitch_scale = 0.6
+autoplay = true
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="ActionTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="OverheadText" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -6.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = -1.0
+text = "1"
+label_settings = SubResource("LabelSettings_vihxg")
+horizontal_alignment = 1
+
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
+[connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]

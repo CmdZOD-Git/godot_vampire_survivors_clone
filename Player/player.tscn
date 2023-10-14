@@ -1,0 +1,160 @@
+[gd_scene load_steps=16 format=3 uid="uid://bod4gfon1ya4x"]
+
+[ext_resource type="Texture2D" uid="uid://1kcxnnqbi8oi" path="res://Player/SquadLeader.png" id="1_hc5gy"]
+[ext_resource type="Script" path="res://Player/player.gd" id="1_kgjyg"]
+[ext_resource type="Resource" uid="uid://04swyivnhby1" path="res://Player/Upgrade/DefenceUp/defence_up_upgrade_list.tres" id="2_j7oxe"]
+[ext_resource type="PackedScene" uid="uid://bgxu6r4to3mbs" path="res://Utility/hurt_box.tscn" id="3_cil6b"]
+[ext_resource type="Resource" uid="uid://dr77kynhov4ym" path="res://Player/Upgrade/Plasma/plasma_upgrade_list.tres" id="3_mfixc"]
+[ext_resource type="Resource" uid="uid://c2uitogacirb" path="res://Player/Upgrade/AttackUp/attack_up_upgrade_list.tres" id="4_fh840"]
+[ext_resource type="Resource" uid="uid://6ulc8ctu8gxj" path="res://Player/Upgrade/AreaUp/area_up_upgrade_list.tres" id="5_yfvrg"]
+[ext_resource type="Resource" uid="uid://c7pwf5su47jng" path="res://Player/Upgrade/Rocket/rocket_upgrade_list.tres" id="6_v0liy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kbmo5"]
+radius = 4.0
+
+[sub_resource type="Animation" id="Animation_a5fy2"]
+resource_name = "Move"
+length = 0.6
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fg4p2"]
+_data = {
+"Move": SubResource("Animation_a5fy2")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3o6g6"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gvdpe"]
+radius = 251.509
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t0jj5"]
+radius = 52.0096
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u768u"]
+radius = 9.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 1
+motion_mode = 1
+script = ExtResource("1_kgjyg")
+player_upgrade_list = Array[Resource("res://Player/upgrade_list.gd")]([ExtResource("2_j7oxe"), ExtResource("3_mfixc"), ExtResource("5_yfvrg"), ExtResource("4_fh840"), ExtResource("6_v0liy")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -4)
+texture = ExtResource("1_hc5gy")
+hframes = 5
+vframes = 7
+frame = 5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_kbmo5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fg4p2")
+}
+
+[node name="HurtBox" parent="." instance=ExtResource("3_cil6b")]
+position = Vector2(1.95896, 0.975805)
+collision_mask = 2
+
+[node name="HurtBoxShape" parent="HurtBox" index="0"]
+position = Vector2(-2.95896, -0.975805)
+shape = SubResource("CircleShape2D_3o6g6")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Attack" type="Node2D" parent="."]
+
+[node name="RocketTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+
+[node name="RocketAttackTimer" type="Timer" parent="Attack/RocketTimer"]
+unique_name_in_owner = true
+wait_time = 0.075
+
+[node name="PlasmaTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[node name="PlasmaAttackTimer" type="Timer" parent="Attack/PlasmaTimer"]
+unique_name_in_owner = true
+wait_time = 0.1
+
+[node name="SlasherTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[node name="SlasherAttackTimer" type="Timer" parent="Attack/SlasherTimer"]
+unique_name_in_owner = true
+wait_time = 0.5
+
+[node name="EnemyDetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
+light_mask = 0
+shape = SubResource("CircleShape2D_gvdpe")
+debug_color = Color(0.376471, 0.6, 0.360784, 0.419608)
+
+[node name="GrabAttractArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabAttractArea"]
+shape = SubResource("CircleShape2D_t0jj5")
+debug_color = Color(0.505882, 0.560784, 0.443137, 0.419608)
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CollectArea"]
+position = Vector2(-1, -2)
+shape = SubResource("CircleShape2D_u768u")
+
+[node name="HPBarMask" type="ColorRect" parent="."]
+unique_name_in_owner = true
+offset_left = -11.0
+offset_top = -17.0
+offset_right = 7.0
+offset_bottom = -13.0
+color = Color(0, 0, 0, 0.392157)
+
+[node name="HPBar" type="ColorRect" parent="HPBarMask"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 4.0
+color = Color(1, 0, 0, 0.392157)
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="Attack/RocketTimer" to="." method="_on_rocket_timer_timeout"]
+[connection signal="timeout" from="Attack/RocketTimer/RocketAttackTimer" to="." method="_on_rocket_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/PlasmaTimer" to="." method="_on_plasma_timer_timeout"]
+[connection signal="timeout" from="Attack/PlasmaTimer/PlasmaAttackTimer" to="." method="_on_plasma_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/SlasherTimer" to="." method="_on_slasher_timer_timeout"]
+[connection signal="timeout" from="Attack/SlasherTimer/SlasherAttackTimer" to="." method="_on_slasher_attack_timer_timeout"]
+[connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
+[connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
+[connection signal="area_entered" from="GrabAttractArea" to="." method="_on_grab_attract_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
+
+[editable path="HurtBox"]

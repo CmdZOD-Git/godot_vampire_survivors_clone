@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=7 format=3 uid="uid://eslnvnipt113"]
+
+[ext_resource type="Script" path="res://Player/upgrade_effect.gd" id="1_vta1c"]
+[ext_resource type="Texture2D" uid="uid://b5dcy4dth4wri" path="res://Textures/Items/Weapons/Assault-Class.png" id="2_fp755"]
+[ext_resource type="Script" path="res://Player/upgrade_item.gd" id="3_2rs6k"]
+
+[sub_resource type="Resource" id="Resource_ei8hf"]
+script = ExtResource("1_vta1c")
+upgrade_effect = 5
+effect_value = 1
+
+[sub_resource type="Resource" id="Resource_byli7"]
+script = ExtResource("1_vta1c")
+upgrade_effect = 13
+effect_value = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5tt1"]
+atlas = ExtResource("2_fp755")
+region = Rect2(18, 51, 11, 12)
+
+[resource]
+script = ExtResource("3_2rs6k")
+name = "Slasher2"
+level = 2
+icon = SubResource("AtlasTexture_m5tt1")
+prerequisite = Array[String](["Slasher1"])
+effect_call = Array[ExtResource("1_vta1c")]([SubResource("Resource_ei8hf"), SubResource("Resource_byli7")])
+description_name = "Squad"
+description = "Description:
+"

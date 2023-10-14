@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=6 format=3 uid="uid://dc7kedsjrknk2"]
+
+[ext_resource type="Script" path="res://Player/upgrade_effect.gd" id="1_uqukw"]
+[ext_resource type="Texture2D" uid="uid://bldhq1fcl8ab1" path="res://Textures/Items/icon-set.png" id="2_pa6yx"]
+[ext_resource type="Script" path="res://Player/upgrade_item.gd" id="3_s50fw"]
+
+[sub_resource type="Resource" id="Resource_ei8hf"]
+script = ExtResource("1_uqukw")
+upgrade_effect = 5
+effect_value = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7ihu"]
+atlas = ExtResource("2_pa6yx")
+region = Rect2(19, 19, 10, 10)
+
+[resource]
+script = ExtResource("3_s50fw")
+name = "Rocket1"
+level = 1
+icon = SubResource("AtlasTexture_p7ihu")
+prerequisite = Array[String]([])
+effect_call = Array[ExtResource("1_uqukw")]([SubResource("Resource_ei8hf")])
+description_name = "Rocket"
+description = "Description:
+A simple rocket going in a straight line"
+display_in_tray = true
